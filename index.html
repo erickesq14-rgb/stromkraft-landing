@@ -241,42 +241,6 @@
     );
   }
 
-  /* ── STATS ── */
-  .stats-bar {
-    background: var(--negro);
-    padding: 48px 5%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .stat-item {
-    background: var(--gris-medio);
-    border: 1px solid rgba(91,253,11,0.12);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .stat-num {
-    font-family: 'Radhani', sans-serif;
-    font-size: 40px;
-    font-weight: 700;
-    color: var(--negro);
-    background: var(--verde);
-    line-height: 1;
-    padding: 18px 24px 14px;
-    clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
-  }
-
-  .stat-label {
-    font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    letter-spacing: 0.04em;
-    padding: 16px 24px;
-    line-height: 1.5;
-  }
-
   /* ── SECCIONES COMUNES ── */
   section { padding: 96px 5%; }
 
@@ -646,8 +610,6 @@
     .porque-grid { grid-template-columns: 1fr; gap: 48px; }
     .proceso-steps { grid-template-columns: 1fr 1fr; gap: 48px; }
     .proceso-steps::before { display: none; }
-    .stats-bar { grid-template-columns: 1fr; padding: 32px 5%; }
-    .stat-num { font-size: 32px; }
   }
 
   @media (max-width: 600px) {
@@ -701,22 +663,6 @@
     <div class="hero-img-overlay-bottom"></div>
   </div>
 </section>
-
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat-item">
-    <div class="stat-num">100% eléctrico</div>
-    <div class="stat-label">Solo trabajamos con vehículos eléctricos. Sin excepciones.</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">Micro → Flota</div>
-    <div class="stat-label">Desde una ebike hasta una flota corporativa completa.</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">Diagnóstico primero</div>
-    <div class="stat-label">Sabemos qué tiene antes de tocar nada.</div>
-  </div>
-</div>
 
 <!-- SERVICIOS -->
 <section class="servicios" id="servicios">
