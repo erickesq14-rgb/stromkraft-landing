@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stromkraft — Taller Especializado en Movilidad Eléctrica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Radhani:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --verde: #5BFD0B;
+    --negro: #080A09;
+    --blanco: #FFFFFF;
+    --gris-oscuro: #111410;
+    --gris-medio: #1C1F1B;
+    --gris-sutil: #252820;
+    --verde-dim: rgba(91,253,11,0.12);
+    --verde-dim2: rgba(91,253,11,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── TIPOGRAFÍA ── */
+  h1, h2, h3, h4, .label-tec {
+    font-family: 'Radhani', sans-serif;
+    letter-spacing: 0.01em;
+  }
+
+  .label-cat {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--verde);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 68px;
+    background: rgba(8,10,9,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(91,253,11,0.1);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .nav-logo-img {
+    height: 44px;
+    width: auto;
+    background: var(--negro);
+    padding: 4px 8px;
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--verde);
+    color: var(--negro);
+    font-family: 'Radhani', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 10px 22px;
+    text-decoration: none;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .nav-cta:hover { background: #7fff30; transform: translateY(-1px); }
+  .nav-cta svg { width: 16px; height: 16px; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 68px 5% 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(91,253,11,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding-right: 5%;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .hero-eyebrow-line {
+    width: 32px;
+    height: 2px;
+    background: var(--verde);
+  }
+
+  .hero-h1 {
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 700;
+    line-height: 1.0;
+    color: var(--blanco);
+    margin-bottom: 12px;
+  }
+
+  .hero-h1 .accent { color: var(--verde); display: block; }
+
+  .hero-descriptor {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 32px;
+  }
+
+  .hero-body {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    max-width: 460px;
+    margin-bottom: 44px;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--verde);
+    color: var(--negro);
+    font-family: 'Radhani', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 15px 32px;
+    text-decoration: none;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: #7fff30; transform: translateY(-2px); }
+  .btn-primary svg { width: 18px; height: 18px; }
+
+  .btn-secondary {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--blanco); }
+
+  /* ── HERO VISUAL ── */
+  .hero-visual {
+    position: relative;
+    height: 100%;
+    min-height: 560px;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      var(--negro) 0%,
+      rgba(8,10,9,0.35) 45%,
+      rgba(8,10,9,0.05) 100%
+    );
+  }
+
+  .hero-img-overlay-bottom {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      var(--negro) 0%,
+      transparent 28%
+    );
+  }
+
+  /* ── STATS ── */
+  .stats-bar {
+    background: var(--negro);
+    padding: 48px 5%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .stat-item {
+    background: var(--gris-medio);
+    border: 1px solid rgba(91,253,11,0.12);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: 'Radhani', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--negro);
+    background: var(--verde);
+    line-height: 1;
+    padding: 18px 24px 14px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.04em;
+    padding: 16px 24px;
+    line-height: 1.5;
+  }
+
+  /* ── SECCIONES COMUNES ── */
+  section { padding: 96px 5%; }
+
+  .section-header {
+    margin-bottom: 64px;
+  }
+
+  .section-header h2 {
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 700;
+    color: var(--blanco);
+    line-height: 1.1;
+    margin-top: 12px;
+  }
+
+  /* ── SERVICIOS ── */
+  .servicios { background: var(--negro); }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: rgba(91,253,11,0.08);
+    border: 1px solid rgba(91,253,11,0.08);
+  }
+
+  .servicio-card {
+    background: var(--negro);
+    padding: 40px 36px;
+    position: relative;
+    transition: background 0.25s;
+  }
+
+  .servicio-card:hover { background: var(--gris-sutil); }
+
+  .servicio-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--verde);
+    transition: height 0.3s;
+  }
+
+  .servicio-card:hover::before { height: 100%; }
+
+  .servicio-num {
+    font-family: 'Radhani', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(91,253,11,0.5);
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+
+  .servicio-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--verde-dim);
+    border: 1px solid rgba(91,253,11,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+
+  .servicio-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--verde);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .servicio-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--blanco);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .servicio-card p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  /* ── POR QUÉ STROMKRAFT ── */
+  .porque { background: var(--gris-oscuro); }
+
+  .porque-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .porque-pilares {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pilar {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+
+  .pilar:first-child { padding-top: 0; }
+  .pilar:last-child { border-bottom: none; }
+
+  .pilar-marker {
+    width: 4px;
+    height: 48px;
+    background: var(--verde);
+    flex-shrink: 0;
+    margin-top: 4px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .pilar h3 {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--blanco);
+    margin-bottom: 6px;
+  }
+
+  .pilar p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  .porque-visual {
+    position: relative;
+  }
+
+  .porque-box {
+    position: relative;
+    overflow: hidden;
+    min-height: 480px;
+    border: 1px solid rgba(91,253,11,0.15);
+  }
+
+  .porque-box-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .porque-box-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(8,10,9,0.95) 0%,
+      rgba(8,10,9,0.5) 50%,
+      rgba(8,10,9,0.15) 100%
+    );
+  }
+
+  .porque-box-content {
+    position: relative;
+    z-index: 2;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 480px;
+  }
+
+  .porque-box blockquote {
+    font-family: 'Radhani', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--blanco);
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  .porque-box blockquote span { color: var(--verde); }
+
+  .porque-box-meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .porque-verde-line {
+    width: 40px;
+    height: 3px;
+    background: var(--verde);
+    margin-bottom: 20px;
+  }
+
+  /* ── PROCESO ── */
+  .proceso { background: var(--negro); }
+
+  .proceso-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: relative;
+  }
+
+  .proceso-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--verde) 0%, rgba(91,253,11,0.2) 100%);
+    z-index: 0;
+  }
+
+  .proceso-step {
+    padding: 0 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .proceso-dot {
+    width: 56px;
+    height: 56px;
+    background: var(--gris-medio);
+    border: 2px solid var(--verde);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-family: 'Radhani', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--verde);
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+
+  .proceso-step h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blanco);
+    margin-bottom: 8px;
+  }
+
+  .proceso-step p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+  }
+
+  /* ── CTA FINAL ── */
+  .cta-final {
+    background: var(--gris-oscuro);
+    text-align: center;
+    padding: 120px 5%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-final::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(91,253,11,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-final h2 {
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 700;
+    color: var(--blanco);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .cta-final h2 span { color: var(--verde); }
+
+  .cta-final p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.55);
+    max-width: 500px;
+    margin: 0 auto 48px;
+    position: relative;
+  }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--verde);
+    color: var(--negro);
+    font-family: 'Radhani', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 18px 44px;
+    text-decoration: none;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+  }
+
+  .btn-whatsapp:hover { background: #7fff30; transform: translateY(-2px); }
+  .btn-whatsapp svg { width: 22px; height: 22px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--negro);
+    border-top: 1px solid rgba(91,253,11,0.1);
+    padding: 40px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .footer-logo-img {
+    height: 40px;
+    width: auto;
+    background: var(--negro);
+    padding: 4px 8px;
+  }
+
+  .footer-descriptor {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 100px; padding-bottom: 60px; }
+    .hero-visual { display: none; }
+    .porque-grid { grid-template-columns: 1fr; gap: 48px; }
+    .proceso-steps { grid-template-columns: 1fr 1fr; gap: 48px; }
+    .proceso-steps::before { display: none; }
+    .stats-bar { grid-template-columns: 1fr; padding: 32px 5%; }
+    .stat-num { font-size: 32px; }
+  }
+
+  @media (max-width: 600px) {
+    .proceso-steps { grid-template-columns: 1fr; }
+    .servicio-card { padding: 28px 24px; }
+    nav { padding: 0 4%; }
+    .nav-wordmark { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo" aria-label="Stromkraft inicio">
+    <img src="logo.png" alt="Stromkraft" class="nav-logo-img">
+  </a>
+  <a href="https://wa.me/50671068672?text=Hola%2C%20quiero%20agendar%20una%20revisión%20para%20mi%20vehículo%20eléctrico." class="nav-cta" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.115 1.529 5.843L.057 23.486a.5.5 0 00.611.657l5.848-1.53A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.887 9.887 0 01-5.031-1.371l-.36-.214-3.735.979 1.001-3.63-.236-.374A9.856 9.856 0 012.118 12C2.118 6.539 6.539 2.118 12 2.118S21.882 6.539 21.882 12 17.461 21.882 12 21.882z"/></svg>
+    Agenda tu revisión
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="label-cat">Movilidad eléctrica · Costa Rica</span>
+    </div>
+    <h1 class="hero-h1">
+      Soporte técnico de alta precisión
+      <span class="accent">para movilidad eléctrica.</span>
+    </h1>
+    <p class="hero-descriptor">Taller especializado en movilidad eléctrica · Costa Rica</p>
+    <p class="hero-body">
+      Un vehículo eléctrico no falla igual que uno convencional. En Stromkraft diagnosticamos, mantenemos y reparamos cualquier sistema eléctrico — desde la ebike más compacta hasta la flota más exigente — con el equipo y el criterio técnico que eso requiere.
+    </p>
+    <div class="hero-cta-group">
+      <a href="https://wa.me/50671068672?text=Hola%2C%20quiero%20agendar%20una%20revisión%20para%20mi%20vehículo%20eléctrico." class="btn-primary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.115 1.529 5.843L.057 23.486a.5.5 0 00.611.657l5.848-1.53A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.887 9.887 0 01-5.031-1.371l-.36-.214-3.735.979 1.001-3.63-.236-.374A9.856 9.856 0 012.118 12C2.118 6.539 6.539 2.118 12 2.118S21.882 6.539 21.882 12 17.461 21.882 12 21.882z"/></svg>
+        Escribinos por WhatsApp
+      </a>
+
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <img src="hero.png" alt="Técnico Stromkraft trabajando en batería de vehículo eléctrico" class="hero-img">
+    <div class="hero-img-overlay"></div>
+    <div class="hero-img-overlay-bottom"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">100% eléctrico</div>
+    <div class="stat-label">Solo trabajamos con vehículos eléctricos. Sin excepciones.</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">Micro → Flota</div>
+    <div class="stat-label">Desde una ebike hasta una flota corporativa completa.</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">Diagnóstico primero</div>
+    <div class="stat-label">Sabemos qué tiene antes de tocar nada.</div>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section class="servicios" id="servicios">
+  <div class="section-header">
+    <span class="label-cat">Lo que hacemos</span>
+    <h2>Cuatro ejes técnicos.<br>Un solo punto de soporte.</h2>
+  </div>
+
+  <div class="servicios-grid">
+
+    <div class="servicio-card">
+      <div class="servicio-num">01</div>
+      <div class="servicio-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+      </div>
+      <h3>Diagnóstico de alta precisión</h3>
+      <p>Escaneo especializado del tren motriz eléctrico: BMS, motor, controlador y sistema de potencia. Sabemos qué falla y por qué antes de intervenir.</p>
+    </div>
+
+    <div class="servicio-card">
+      <div class="servicio-num">02</div>
+      <div class="servicio-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M22 11h1a1 1 0 010 2h-1"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/><line x1="7" y1="12" x2="9" y2="12"/></svg>
+      </div>
+      <h3>Análisis de baterías de litio</h3>
+      <p>Evaluación profunda de celdas, balanceo, degradación y capacidad real. Optimizamos la vida útil de la batería en lugar de simplemente reemplazarla.</p>
+    </div>
+
+    <div class="servicio-card">
+      <div class="servicio-num">03</div>
+      <div class="servicio-icon">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h3>Infraestructura de carga</h3>
+      <p>Inspección, diagnóstico y certificación técnica de estaciones de carga. Garantizamos un suministro seguro y continuo, sin interrupciones operativas.</p>
+    </div>
+
+    <div class="servicio-card">
+      <div class="servicio-num">04</div>
+      <div class="servicio-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <h3>Motor y tren motriz</h3>
+      <p>Diagnóstico de motores hub y centrales. Revisión de devanado, rodamientos y eficiencia de tracción en todo tipo de vehículo eléctrico.</p>
+    </div>
+
+    <div class="servicio-card">
+      <div class="servicio-num">05</div>
+      <div class="servicio-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+      </div>
+      <h3>Controlador y electrónica</h3>
+      <p>Revisión y programación de controladores. Ajuste de parámetros de velocidad, torque y modo de conducción según el perfil de uso.</p>
+    </div>
+
+    <div class="servicio-card">
+      <div class="servicio-num">06</div>
+      <div class="servicio-icon">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <h3>Mantenimiento preventivo</h3>
+      <p>Programas preventivos y correctivos para vehículos particulares y flotas. Una revisión a tiempo protege el sistema y evita paros inesperados.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- POR QUÉ STROMKRAFT -->
+<section class="porque" id="porque">
+  <div class="porque-grid">
+    <div>
+      <div class="section-header" style="margin-bottom: 48px;">
+        <span class="label-cat">Por qué elegirnos</span>
+        <h2>No somos un taller convencional adaptado. Somos especialistas desde el origen.</h2>
+      </div>
+      <div class="porque-pilares">
+        <div class="pilar">
+          <div class="pilar-marker"></div>
+          <div>
+            <h3>Precisión técnica</h3>
+            <p>Herramientas y procesos diseñados para sistemas eléctricos. No adaptamos metodologías de combustión — trabajamos con el estándar que la electromovilidad exige.</p>
+          </div>
+        </div>
+        <div class="pilar">
+          <div class="pilar-marker"></div>
+          <div>
+            <h3>Confiabilidad estructural</h3>
+            <p>El alto voltaje requiere protocolo estricto. Cada intervención — desde una ebike hasta una estación de carga — se ejecuta bajo criterios de seguridad controlados.</p>
+          </div>
+        </div>
+        <div class="pilar">
+          <div class="pilar-marker"></div>
+          <div>
+            <h3>Sostenibilidad activa</h3>
+            <p>Extender la vida útil de cada batería y cada vehículo es parte del trabajo. El mejor soporte técnico es el que hace que la transición eléctrica funcione de verdad.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="porque-visual">
+      <div class="porque-box">
+        <img src="porque.png" alt="Equipo de diagnóstico especializado conectado a bicicleta eléctrica en Stromkraft" class="porque-box-img">
+        <div class="porque-box-overlay"></div>
+        <div class="porque-box-content">
+          <div class="porque-verde-line"></div>
+          <blockquote>
+            "Blindamos la inversión eléctrica de quienes eligen moverse diferente — una unidad o una <span>flota entera</span>."
+          </blockquote>
+          <p class="porque-box-meta">Stromkraft · Taller especializado en movilidad eléctrica</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proceso" id="proceso">
+  <div class="section-header" style="text-align: center; max-width: 600px; margin: 0 auto 80px;">
+    <span class="label-cat">Cómo funciona</span>
+    <h2>Proceso claro. Sin tiempos muertos.</h2>
+  </div>
+
+  <div class="proceso-steps">
+    <div class="proceso-step">
+      <div class="proceso-dot">01</div>
+      <h3>Contacto</h3>
+      <p>Describinos el vehículo y la situación por WhatsApp. No necesitás saber qué falla — para eso estamos.</p>
+    </div>
+    <div class="proceso-step">
+      <div class="proceso-dot">02</div>
+      <h3>Ingreso</h3>
+      <p>Confirmamos fecha y hora. Recibimos el vehículo con un protocolo de revisión inicial documentado.</p>
+    </div>
+    <div class="proceso-step">
+      <div class="proceso-dot">03</div>
+      <h3>Diagnóstico</h3>
+      <p>Escaneamos el sistema completo y te presentamos los hallazgos con claridad antes de cualquier intervención.</p>
+    </div>
+    <div class="proceso-step">
+      <div class="proceso-dot">04</div>
+      <h3>Entrega</h3>
+      <p>Ejecutamos el trabajo con tu aprobación y entregamos el vehículo operativo, con respaldo técnico del trabajo realizado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <span class="label-cat" style="display:block; margin-bottom: 20px;">¿Listo para empezar?</span>
+  <h2>Tu vehículo eléctrico merece<br>soporte <span>a su altura.</span></h2>
+  <p>Escribinos por WhatsApp. Cuéntanos qué tenés y lo que está pasando — el resto lo manejamos nosotros.</p>
+  <a href="https://wa.me/50671068672?text=Hola%2C%20quiero%20agendar%20una%20revisión%20para%20mi%20vehículo%20eléctrico." class="btn-whatsapp" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.115 1.529 5.843L.057 23.486a.5.5 0 00.611.657l5.848-1.53A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.887 9.887 0 01-5.031-1.371l-.36-.214-3.735.979 1.001-3.63-.236-.374A9.856 9.856 0 012.118 12C2.118 6.539 6.539 2.118 12 2.118S21.882 6.539 21.882 12 17.461 21.882 12 21.882z"/></svg>
+    Escribinos por WhatsApp
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="logo.png" alt="Stromkraft" class="footer-logo-img">
+    <div class="footer-descriptor">Taller especializado en movilidad eléctrica</div>
+  </div>
+  <div class="footer-copy">© 2026 Stromkraft · Costa Rica</div>
+</footer>
+
+</body>
+</html>
